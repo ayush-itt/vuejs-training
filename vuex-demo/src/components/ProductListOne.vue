@@ -12,17 +12,17 @@
 </template>
 
 <script>
-import ProductMixin from "../mixins/productsMixin";
+import { mapActions, mapGetters } from "vuex";
 export default {
     data() {
         return {};
     },
     methods: {
-        reducePrice: function (payload) {
-            this.$store.dispatch("reducePrice", payload);
-        },
+        ...mapActions(["reducePrice"]),
     },
-    mixins: [ProductMixin],
+    computed: {
+        ...mapGetters(["products"]),
+    },
 };
 </script>
 

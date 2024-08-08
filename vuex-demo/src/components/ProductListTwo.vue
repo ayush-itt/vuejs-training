@@ -11,12 +11,14 @@
 </template>
 
 <script>
-import ProductMixin from "../mixins/productsMixin";
+import { mapGetters } from "vuex";
 export default {
     data() {
         return {};
     },
-    mixins: [ProductMixin],
+    computed: {
+        ...mapGetters(["saleProducts"]),
+    },
 };
 </script>
 
