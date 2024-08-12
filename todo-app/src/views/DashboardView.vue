@@ -1,7 +1,8 @@
 <template>
-    <div class="dashboard">
-        <h1>Dashboard</h1>
-    </div>
+    <v-col class="dashboard">
+        <h1 class="grey--text overline">Dashboard</h1>
+        <v-container class="my-5"> Content </v-container>
+    </v-col>
 </template>
 
 <script>

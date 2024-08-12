@@ -10,6 +10,13 @@
                 <span class="font-weight-light">ToDo</span>
                 <span>App</span>
             </v-toolbar-title>
+
+            <v-spacer></v-spacer>
+
+            <v-btn color="red lighten-1">
+                <span>Sign Out</span>
+                <v-icon right>mdi-exit-to-app</v-icon>
+            </v-btn>
         </v-app-bar>
 
         <v-navigation-drawer
@@ -20,7 +27,7 @@
             :permanent="appConfig.permanent"
             class="gray lighten-2"
         >
-            <v-list-item>
+            <v-list-item class="py-1">
                 <v-list-item-avatar>
                     <v-img :src="profile.image"></v-img>
                 </v-list-item-avatar>
