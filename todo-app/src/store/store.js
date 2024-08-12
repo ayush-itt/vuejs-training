@@ -53,8 +53,6 @@ export default new Vuex.Store({
             commit("SET_PROFILE", profile);
         },
         addTodo({ commit }, todo) {
-            console.log("addtodo");
-
             const newTodo = { ...todo, id: Date.now() };
             commit("ADD_TODO", newTodo);
         },

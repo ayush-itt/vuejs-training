@@ -21,8 +21,8 @@
                 </v-btn-toggle>
             </v-row>
 
-            <!-- Todo Items List -->
-            <v-list>
+            <!-- Todo Items List (Scrollable) -->
+            <v-list class="scrollable-list">
                 <v-list-item
                     v-for="(task, id) in filteredTasks"
                     :key="id"
@@ -210,6 +210,12 @@ export default {
     position: fixed;
     bottom: 16px;
     right: 16px;
+}
+
+/* Scrollable Todo List */
+.scrollable-list {
+    max-height: 54vh; /* Adjust as needed */
+    overflow-y: auto;
 }
 
 /* Style adjustments for better spacing and readability */
