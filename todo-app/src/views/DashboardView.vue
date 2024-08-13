@@ -2,7 +2,6 @@
     <v-col class="dashboard">
         <h1 class="grey--text overline">Dashboard</h1>
         <v-container class="my-5">
-            <!-- First Row: Task Summaries -->
             <v-row class="mb-3" dense>
                 <v-col
                     v-for="(item, index) in taskSummaries"
@@ -26,7 +25,6 @@
                 </v-col>
             </v-row>
 
-            <!-- Second Row: Today's Tasks -->
             <v-row dense>
                 <v-col cols="12">
                     <v-card elevation="2" outlined>
@@ -39,36 +37,8 @@
                             ></v-badge
                         ></v-card-title>
                         <v-divider></v-divider>
-                        <v-list class="scrollable-list">
-                            <v-list-item
-                                v-for="(task, id) in todaysTasks"
-                                :key="id"
-                                class="todo-item"
-                            >
-                                <v-list-item-content class="px-5">
-                                    <v-list-item-title
-                                        :class="{
-                                            'text-decoration-line-through':
-                                                task.done,
-                                        }"
-                                    >
-                                        {{ task.text }}
-                                    </v-list-item-title>
-                                    <v-list-item-subtitle class="grey--text">
-                                        Due: {{ task.dueDate }}
-                                    </v-list-item-subtitle>
-                                </v-list-item-content>
-                            </v-list-item>
-                            <v-list-item v-if="!todaysTasks.length">
-                                <v-list-item-content>
-                                    <v-list-item-title
-                                        class="text-center grey--text"
-                                    >
-                                        No tasks for today.
-                                    </v-list-item-title>
-                                </v-list-item-content>
-                            </v-list-item>
-                        </v-list>
+                        <DataTable :headers="headers" :items="todaysTasks">
+                        </DataTable>
                     </v-card>
                 </v-col>
             </v-row>
@@ -78,9 +48,19 @@
 
 <script>
 import { mapGetters } from "vuex";
+import DataTable from "../components/DataTable";
 
 export default {
     name: "DashboardView",
+    data() {
+        return {
+            headers: [
+                { text: "Title", value: "text" },
+                { text: "Due Date", value: "dueDate", sortable: false },
+            ],
+        };
+    },
+    components: { DataTable },
     computed: {
         ...mapGetters(["allTodos", "remainingTodos", "completedTodos"]),
         taskSummaries() {
@@ -111,9 +91,3 @@ export default {
     text-decoration: line-through;
 }
 
-/* Scrollable Todo List */
-.scrollable-list {
-    max-height: 40vh; /* Adjust as needed */
-    overflow-y: auto;
-}
-</style>
