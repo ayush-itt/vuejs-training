@@ -8,8 +8,7 @@ function saveToLocalStorage(key, data) {
 }
 
 function getFromLocalStorage(key) {
-    const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : null;
+    return JSON.parse(localStorage.getItem(key)) || null;
 }
 
 export default new Vuex.Store({
@@ -68,6 +67,11 @@ export default new Vuex.Store({
         removeUser({ commit }, userId) {
             commit("REMOVE_USER", userId);
         },
+        loadInitialData() {
+            getFromLocalStorage("todos");
+            getFromLocalStorage("users");
+            getFromLocalStorage("profile");
+        },
     },
     getters: {
         profile: (state) => state.profile,
@@ -75,5 +79,8 @@ export default new Vuex.Store({
         remainingTodos: (state) => state.todos.filter((todo) => !todo.done),
         completedTodos: (state) => state.todos.filter((todo) => todo.done),
         users: (state) => state.users,
+        getUserByUsername: (state) => (username) => {
+            return state.users.find((user) => user.username === username);
+        },
     },
 });

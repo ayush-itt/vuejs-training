@@ -13,7 +13,7 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn color="red lighten-1">
+            <v-btn color="red lighten-1" @click="signOut">
                 <span>Sign Out</span>
                 <v-icon right>mdi-exit-to-app</v-icon>
             </v-btn>
@@ -62,8 +62,8 @@ export default {
     data() {
         return {
             profile: {
-                username: "John Leider",
-                image: "https://randomuser.me/api/portraits/men/85.jpg",
+                username: this.$store.getters.profile.username,
+                image: this.$store.getters.profile.img,
             },
             appConfig: {
                 drawer: false,
@@ -74,7 +74,7 @@ export default {
                 dashboard: {
                     title: "Dashboard",
                     icon: "mdi-view-dashboard",
-                    route: "/",
+                    route: "/dashboard",
                 },
                 todo: {
                     title: "To Do",
@@ -88,6 +88,12 @@ export default {
                 },
             },
         };
+    },
+    methods: {
+        signOut() {
+            this.$store.dispatch("setProfile", null);
+            this.$router.push("/login");
+        },
     },
 };
 </script>

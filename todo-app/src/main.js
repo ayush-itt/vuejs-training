@@ -6,6 +6,8 @@ import router from "./router";
 
 Vue.config.productionTip = false;
 
+store.dispatch("loadInitialData");
+
 new Vue({
     vuetify,
     store,
