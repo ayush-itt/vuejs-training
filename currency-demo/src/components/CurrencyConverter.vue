@@ -24,10 +24,9 @@ export default {
             type: Number,
             default: 0,
         },
-        exchangeRate: {
-            type: Number,
-            default: 80, // default
-        },
+    },
+    data() {
+        return { exchangeRate: 83.92 };
     },
     computed: {
         usdValue: {

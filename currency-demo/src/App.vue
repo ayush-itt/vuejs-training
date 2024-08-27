@@ -7,14 +7,10 @@
         </v-app-bar>
 
         <v-main>
-            <CurrencyConverter
-                v-model="amountInUSD"
-                :exchangeRate="83.92"
-            ></CurrencyConverter>
+            <CurrencyConverter v-model="amountInUSD"></CurrencyConverter>
             <!-- <CurrencyConverter
                 :value="amountInUSD"
                 @input="amountInUSD = $event"
-                :exchangeRate="83.92"
             ></CurrencyConverter> -->
         </v-main>
     </v-app>
