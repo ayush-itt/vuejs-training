@@ -3,8 +3,8 @@
         <v-app-bar flat app>
             <v-app-bar-nav-icon
                 class="grey--text"
-                v-if="!appConfig.permanent"
-                @click.stop="appConfig.drawer = !appConfig.drawer"
+                v-if="!navConfig.permanent"
+                @click.stop="navConfig.drawer = !navConfig.drawer"
             ></v-app-bar-nav-icon>
             <v-toolbar-title class="text-uppercase grey--text display-1">
                 <span class="font-weight-light">ToDo</span>
@@ -20,19 +20,19 @@
         </v-app-bar>
 
         <v-navigation-drawer
-            v-model="appConfig.drawer"
+            v-model="navConfig.drawer"
             app
             absolute
-            :temporary="appConfig.overlay && !appConfig.permanent"
-            :permanent="appConfig.permanent"
+            :temporary="navConfig.overlay && !navConfig.permanent"
+            :permanent="navConfig.permanent"
             class="gray lighten-2"
         >
             <v-list-item class="py-1">
                 <v-list-item-avatar>
-                    <v-img :src="profile.image"></v-img>
+                    <v-img :src="user.image"></v-img>
                 </v-list-item-avatar>
 
-                <v-list-item-title>{{ profile.username }}</v-list-item-title>
+                <v-list-item-title>{{ user.username }}</v-list-item-title>
             </v-list-item>
 
             <v-divider></v-divider>
@@ -61,11 +61,11 @@
 export default {
     data() {
         return {
-            profile: {
-                username: this.$store.getters.profile.username,
-                image: this.$store.getters.profile.img,
+            user: {
+                username: this.$store.getters.user.username,
+                image: this.$store.getters.user.img,
             },
-            appConfig: {
+            navConfig: {
                 drawer: false,
                 overlay: true,
                 permanent: true,

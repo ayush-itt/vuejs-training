@@ -13,7 +13,7 @@ function getFromLocalStorage(key) {
 
 export default new Vuex.Store({
     state: {
-        profile: getFromLocalStorage("profile") || {
+        user: getFromLocalStorage("user") || {
             userId: null,
             username: "",
             img: "",
@@ -22,9 +22,9 @@ export default new Vuex.Store({
         users: getFromLocalStorage("users") || [],
     },
     mutations: {
-        SET_PROFILE(state, profile) {
-            state.profile = profile;
-            saveToLocalStorage("profile", profile);
+        SET_PROFILE(state, user) {
+            state.user = user;
+            saveToLocalStorage("user", user);
         },
         ADD_TODO(state, todo) {
             state.todos.push(todo);
@@ -48,8 +48,8 @@ export default new Vuex.Store({
         },
     },
     actions: {
-        setProfile({ commit }, profile) {
-            commit("SET_PROFILE", profile);
+        setProfile({ commit }, user) {
+            commit("SET_PROFILE", user);
         },
         addTodo({ commit }, todo) {
             const newTodo = { ...todo, id: Date.now() };
@@ -70,11 +70,11 @@ export default new Vuex.Store({
         loadInitialData() {
             getFromLocalStorage("todos");
             getFromLocalStorage("users");
-            getFromLocalStorage("profile");
+            getFromLocalStorage("user");
         },
     },
     getters: {
-        profile: (state) => state.profile,
+        user: (state) => state.user,
         allTodos: (state) => state.todos,
         remainingTodos: (state) => state.todos.filter((todo) => !todo.done),
         completedTodos: (state) => state.todos.filter((todo) => todo.done),

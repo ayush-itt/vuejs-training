@@ -56,12 +56,12 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some((record) => record.meta.requiresAuth)) {
-        if (!store.getters.profile?.id) {
+        if (!store.getters.user?.id) {
             next("/login");
         } else {
             next();
         }
-    } else if (store.getters.profile?.id) {
+    } else if (store.getters.user?.id) {
         next("/dashboard");
     } else {
         next();

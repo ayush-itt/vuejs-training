@@ -9,9 +9,6 @@
 
 <script>
 export default {
-    data() {
-        return {};
-    },
     props: {
         headers: {
             type: Array,

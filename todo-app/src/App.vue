@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <NavBarComponent v-if="$store.getters.profile?.id"></NavBarComponent>
+        <NavBarComponent v-if="$store.getters.user?.id"></NavBarComponent>
         <v-main class="mx-2 my-2">
             <router-view />
         </v-main>
