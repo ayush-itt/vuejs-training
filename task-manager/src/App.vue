@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <NavBarComponent
-            v-if="['dashboard', 'tasks', 'report'].includes(this.$route.name)"
+            v-if="this.$route.meta?.requiresAuth"
         ></NavBarComponent>
         <v-main class="mx-4 mb-4">
             <router-view />
@@ -13,7 +13,6 @@
 import NavBarComponent from "@/components/NavbarComponent";
 
 export default {
-    data: () => ({}),
     components: {
         NavBarComponent,
     },
