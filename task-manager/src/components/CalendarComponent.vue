@@ -10,10 +10,16 @@
                 >
                     Today
                 </v-btn>
-                <v-btn fab text small color="grey darken-2" @click="prev">
+                <v-btn
+                    fab
+                    text
+                    small
+                    color="grey darken-2"
+                    @click="previousMonth"
+                >
                     <v-icon small> mdi-chevron-left </v-icon>
                 </v-btn>
-                <v-btn fab text small color="grey darken-2" @click="next">
+                <v-btn fab text small color="grey darken-2" @click="nextMonth">
                     <v-icon small> mdi-chevron-right </v-icon>
                 </v-btn>
                 <v-toolbar-title v-if="$refs.calendar">
@@ -38,8 +44,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
     name: "CalendarComponent",
     data() {
@@ -52,9 +56,11 @@ export default {
         this.$refs.calendar.checkChange();
     },
     computed: {
-        ...mapGetters(["getTasksByLoggedUser"]),
+        getAllTasks() {
+            return this.$store.getters.getTasksByLoggedUser;
+        },
         events() {
-            const eventData = this.getTasksByLoggedUser.reduce((prev, curr) => {
+            const eventData = this.getAllTasks.reduce((prev, curr) => {
                 prev[curr.dueDate] = prev[curr.dueDate]
                     ? prev[curr.dueDate] + 1
                     : 1;
@@ -71,10 +77,10 @@ export default {
         setToday() {
             this.focus = Date.now();
         },
-        prev() {
+        previousMonth() {
             this.$refs.calendar.prev();
         },
-        next() {
+        nextMonth() {
             this.$refs.calendar.next();
         },
     },
