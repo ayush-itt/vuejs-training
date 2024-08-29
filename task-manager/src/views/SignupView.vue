@@ -70,8 +70,8 @@ export default {
             if (this.username && this.email && this.password) {
                 const newUser = {
                     id: Date.now().toString(),
-                    username: this.username,
-                    email: this.email,
+                    username: this.username.toLowerCase(),
+                    email: this.email.toLowerCase(),
                     password: this.password,
                     image:
                         this.profileURL ||
