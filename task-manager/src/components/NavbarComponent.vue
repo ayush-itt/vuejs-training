@@ -16,9 +16,13 @@
             <v-col cols="auto">
                 <v-tooltip bottom>
                     <template v-slot:activator="{ on, attrs }">
-                        <v-btn rounded depressed v-bind="attrs" v-on="on">
+                        <v-btn rounded depressed v-bind="attrs" v-on="on" icon>
                             <v-icon color="blue darken-3">mdi-bell</v-icon>
-                            <v-badge color="warning" overlap></v-badge>
+                            <v-badge
+                                v-if="remainingTasksCount > 0"
+                                color="warning"
+                                overlap
+                            ></v-badge>
                         </v-btn>
                     </template>
                     <span v-if="remainingTasksCount > 0"
