@@ -144,7 +144,6 @@
 
 <script>
 import { AgGridVue } from "ag-grid-vue";
-import { mapGetters } from "vuex";
 import ActionRenderer from "@/components/ActionRenderer"; // eslint-disable-line no-unused-vars
 
 import "ag-grid-community/styles/ag-grid.css";
@@ -221,7 +220,12 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["loggedUser", "getAllUsers"]),
+        loggedUser() {
+            return this.$store.getters.loggedUser;
+        },
+        getAllUsers() {
+            return this.$store.getters.getAllUsers;
+        },
         allTasks() {
             return this.$store.getters.getTasksByLoggedUser;
         },

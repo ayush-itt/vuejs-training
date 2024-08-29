@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import TaskSummaryCard from "@/components/TaskSummaryCard";
 import CalendarComponent from "@/components/CalendarComponent";
 import TodaysTasks from "@/components/TodaysTasks";
@@ -42,24 +41,28 @@ export default {
         return {};
     },
     computed: {
-        ...mapGetters([
-            "getTasksByLoggedUser",
-            "getRemaningTaskOfUser",
-            "getCompletedTaskOfUser",
-        ]),
+        getAllTasks() {
+            return this.$store.getters.getTasksByLoggedUser;
+        },
+        getRemaningTasks() {
+            return this.$store.getters.getRemaningTaskOfUser;
+        },
+        getCompletedTasks() {
+            return this.$store.getters.getCompletedTaskOfUser;
+        },
         taskSummaries() {
             return [
                 {
                     title: "Total Tasks",
-                    count: this.getTasksByLoggedUser.length,
+                    count: this.getAllTasks.length,
                 },
                 {
                     title: "Completed Tasks",
-                    count: this.getCompletedTaskOfUser.length,
+                    count: this.getCompletedTasks.length,
                 },
                 {
                     title: "Remaining Tasks",
-                    count: this.getRemaningTaskOfUser.length,
+                    count: this.getRemaningTasks.length,
                 },
             ];
         },

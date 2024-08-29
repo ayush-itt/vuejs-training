@@ -42,12 +42,15 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
     name: "ReportView",
     computed: {
-        ...mapGetters(["getTasksByLoggedUser", "getCompletedTaskOfUser"]),
+        getAllTasks() {
+            return this.$store.getters.getTasksByLoggedUser;
+        },
+        getCompletedTasks() {
+            return this.$store.getters.getCompletedTaskOfUser;
+        },
         completionRate() {
             const totalTasks = this.getTasksByLoggedUser.length;
             const completedTasks = this.getCompletedTaskOfUser.length;

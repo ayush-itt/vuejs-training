@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import { AgGridVue } from "ag-grid-vue";
 
 import "ag-grid-community/styles/ag-grid.css";
@@ -67,10 +66,12 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["getRemaningTaskOfUser"]),
+        getAllTasks() {
+            return this.$store.getters.getTasksByLoggedUser;
+        },
         todaysTasks() {
             const today = new Date().toISOString().substr(0, 10);
-            return this.getRemaningTaskOfUser.filter(
+            return this.getAllTasks.filter(
                 (task) => task.dueDate === today && !task.status
             );
         },
