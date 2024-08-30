@@ -51,11 +51,22 @@
                 <v-btn color="primary" @click="signup">Sign Up</v-btn>
             </v-card-actions>
         </v-card>
+        <ToastComponent
+            v-model="snackbarProp.show"
+            :text="snackbarProp.msgText"
+            :timeout="snackbarProp.timeout"
+            :color="snackbarProp.color"
+        ></ToastComponent>
     </v-container>
 </template>
 
 <script>
+import ToastComponent from "../components/ToastComponent";
+
 export default {
+    components: {
+        ToastComponent,
+    },
     data() {
         return {
             username: "",
@@ -63,6 +74,12 @@ export default {
             password: "",
             profileURL: "",
             isAdmin: false,
+            snackbarProp: {
+                show: false,
+                timeout: 2000,
+                msgText: "",
+                color: "",
+            },
         };
     },
     methods: {
@@ -83,12 +100,25 @@ export default {
 
                 const success = await this.$store.dispatch("addUser", newUser);
                 if (success) {
-                    this.$router.push("/login");
+                    this.snackbarProp.show = true;
+                    this.snackbarProp.color = "success";
+                    this.snackbarProp.msgText = "User created successful!!";
+
+                    setTimeout(
+                        () => this.$router.push("/login"),
+                        this.snackbarProp.timeout
+                    );
                 } else {
-                    alert("username or email already exists!!");
+                    this.snackbarProp.show = true;
+                    this.snackbarProp.color = "error";
+                    this.snackbarProp.msgText =
+                        "Username or Email already exists!!";
                 }
             } else {
-                alert("Please fill in all required fields.");
+                this.snackbarProp.show = true;
+                this.snackbarProp.color = "error";
+                this.snackbarProp.msgText =
+                    "Please fill in all required fields!!";
             }
         },
     },

@@ -32,15 +32,32 @@
                 <v-btn color="primary" @click="login">Login</v-btn>
             </v-card-actions>
         </v-card>
+        <ToastComponent
+            v-model="snackbarProp.show"
+            :text="snackbarProp.msgText"
+            :timeout="snackbarProp.timeout"
+            :color="snackbarProp.color"
+        ></ToastComponent>
     </v-container>
 </template>
 
 <script>
+import ToastComponent from "../components/ToastComponent";
+
 export default {
+    components: {
+        ToastComponent,
+    },
     data() {
         return {
             username: "",
             password: "",
+            snackbarProp: {
+                show: false,
+                timeout: 2000,
+                msgText: "",
+                color: "",
+            },
         };
     },
     methods: {
@@ -51,9 +68,18 @@ export default {
             });
 
             if (success) {
-                this.$router.push("/dashboard");
+                this.snackbarProp.show = true;
+                this.snackbarProp.color = "success";
+                this.snackbarProp.msgText = "Login successful!!";
+
+                setTimeout(
+                    () => this.$router.push("/dashboard"),
+                    this.snackbarProp.timeout
+                );
             } else {
-                alert("Invalid username or password.");
+                this.snackbarProp.show = true;
+                this.snackbarProp.color = "error";
+                this.snackbarProp.msgText = "Invalid username or password!!";
             }
         },
     },
