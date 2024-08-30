@@ -1,38 +1,13 @@
 <template>
     <v-col class="task">
         <h1 class="grey--text overline">Tasks</h1>
-        <v-container class="my-5">
-            <v-row class="mb-4">
-                <v-btn-toggle v-model="currentFilter" mandatory tile dense>
-                    <v-btn value="all" color="primary" outlined>All</v-btn>
-                    <v-btn value="remaining" color="primary" outlined
-                        >Remaining</v-btn
-                    >
-                    <v-btn value="completed" color="primary" outlined
-                        >Completed</v-btn
-                    >
-                </v-btn-toggle>
-            </v-row>
-
-            <ag-grid-vue
-                class="ag-theme-quartz"
-                :domLayout="'autoHeight'"
-                :columnDefs="columnDefs"
-                :rowData="filteredTasks"
-                :gridOptions="gridOptions"
-                @grid-ready="onGridReady"
-            >
-            </ag-grid-vue>
-
-            <v-btn
-                fab
-                color="primary"
-                class="floating-btn"
-                @click="openAddTaskDialog"
-            >
-                <v-icon>mdi-plus</v-icon>
-            </v-btn>
-        </v-container>
+        <TaskListComponent
+            :dialog="dialog"
+            :editTask="editTask"
+            :newTask="newTask"
+            :context="context"
+            :openAddTaskDialog="openAddTaskDialog"
+        ></TaskListComponent>
 
         <v-dialog v-model="dialog" max-width="500px">
             <v-card>
@@ -139,21 +114,28 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+        <!-- <TaskFormComponent
+            :dialog="dialog"
+            :editTask="editTask"
+            :newTask="newTask"
+            :valid="valid"
+            :addTaskHandler="addTaskHandler"
+            :updateTaskHandler="updateTaskHandler"
+        ></TaskFormComponent> -->
     </v-col>
 </template>
 
 <script>
-import { AgGridVue } from "ag-grid-vue";
+import TaskListComponent from "../components/TaskListComponent";
+// import TaskFormComponent from "../components/TaskFormComponent";
 import ActionRenderer from "@/components/ActionRenderer"; // eslint-disable-line no-unused-vars
-
-import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-quartz.css";
 
 export default {
     name: "TaskView",
     components: {
-        AgGridVue,
         ActionRenderer, // eslint-disable-line
+        TaskListComponent,
+        // TaskFormComponent,
     },
     data() {
         return {
@@ -167,62 +149,15 @@ export default {
                 priority: false,
                 userId: this.$store.getters.loggedUser.id,
             },
-            gridOptions: {
-                pagination: true,
-                paginationPageSize: 5,
-                paginationPageSizeSelector: [5, 10, 20],
-                defaultColDef: {
-                    sortable: true,
-                    filter: true,
-                },
-                context: {
-                    openEditTaskDialog: this.openAddTaskDialog,
-                    deleteTaskHandler: this.deleteTaskHandler,
-                },
+            context: {
+                openEditTaskDialog: this.openAddTaskDialog,
+                deleteTaskHandler: this.deleteTaskHandler,
             },
-            columnDefs: [
-                { headerName: "ID", field: "id", sortable: false },
-                {
-                    headerName: "Title",
-                    field: "title",
-                },
-                {
-                    headerName: "Created Date",
-                    field: "createdDate",
-                },
-                {
-                    headerName: "Due Date",
-                    field: "dueDate",
-                },
-                {
-                    headerName: "Priority",
-                    field: "priority",
-                    cellRenderer: (params) => {
-                        return params.value
-                            ? `<span class="mdi mdi-star" style="color:green"></span>`
-                            : ``;
-                    },
-                },
-                {
-                    headerName: "Status",
-                    field: "status",
-                },
-                {
-                    headerName: "Action",
-                    field: "action",
-                    cellRenderer: "ActionRenderer",
-                    sortable: false,
-                    filter: false,
-                },
-            ],
             datePickerMenu: false,
             minDate: new Date().toISOString().substring(0, 10),
         };
     },
     computed: {
-        loggedUser() {
-            return this.$store.getters.loggedUser;
-        },
         getAllUsers() {
             return this.$store.getters.getAllUsers;
         },
@@ -252,7 +187,6 @@ export default {
         },
     },
     methods: {
-        onGridReady() {},
         openAddTaskDialog(data) {
             if (data?.id) {
                 this.editTask = true;
@@ -301,11 +235,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-.floating-btn {
-    position: fixed;
-    bottom: 16px;
-    right: 16px;
-}
-</style>

@@ -12,9 +12,9 @@
 
         <ag-grid-vue
             class="ag-theme-quartz"
-            :columnDefs="columnDefs"
+            :columnDefs="todaysTaskHeaders"
             :rowData="todaysTasks"
-            :defaultColDef="defaultColDef"
+            :gridOptions="gridOptions"
             :domLayout="'autoHeight'"
         ></ag-grid-vue>
     </v-card>
@@ -22,6 +22,7 @@
 
 <script>
 import { AgGridVue } from "ag-grid-vue";
+import { todaysTaskHeaders, gridOptions } from "../commons/columnHeadres";
 
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
@@ -31,38 +32,8 @@ export default {
     components: { AgGridVue },
     data() {
         return {
-            columnDefs: [
-                { headerName: "Id", field: "id", sortable: false },
-                {
-                    headerName: "Title",
-                    field: "title",
-                },
-                {
-                    headerName: "Created Date",
-                    field: "createdDate",
-                    filter: false,
-                },
-                {
-                    headerName: "Due Date",
-                    field: "dueDate",
-                    sortable: false,
-                    filter: false,
-                },
-                {
-                    headerName: "Priority",
-                    field: "priority",
-                    cellRenderer: (params) => {
-                        return params.value
-                            ? `<span class="mdi mdi-star" style="color:green"></span>`
-                            : ``;
-                    },
-                    filter: false,
-                },
-            ],
-            defaultColDef: {
-                sortable: true,
-                filter: true,
-            },
+            todaysTaskHeaders,
+            gridOptions,
         };
     },
     computed: {

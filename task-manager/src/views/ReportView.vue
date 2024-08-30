@@ -17,8 +17,8 @@
                             <v-spacer></v-spacer>
                             <v-card-title>
                                 <span class="subtitle-1"
-                                    >{{ getCompletedTaskOfUser.length }} /
-                                    {{ getTasksByLoggedUser.length }}</span
+                                    >{{ getAllTasks.length }} /
+                                    {{ getCompletedTasks.length }}</span
                                 >
                             </v-card-title>
                         </v-row>
@@ -52,8 +52,8 @@ export default {
             return this.$store.getters.getCompletedTaskOfUser;
         },
         completionRate() {
-            const totalTasks = this.getTasksByLoggedUser.length;
-            const completedTasks = this.getCompletedTaskOfUser.length;
+            const totalTasks = this.getAllTasks.length;
+            const completedTasks = this.getCompletedTasks.length;
             return totalTasks > 0
                 ? Math.round((completedTasks / totalTasks) * 100)
                 : 0;
