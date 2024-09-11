@@ -1,6 +1,6 @@
 const asyncHandler = require("../../../utils/async-handler");
 const ApiResponse = require("../../../utils/api-response");
-const { deleteAllTasksUsecase } = require("../../usecase");
+const { deleteAllTasksUsecase } = require("../../usecases");
 
 const { TASK_DELETE_SUCCESS } = require("../../../commons/constants");
 

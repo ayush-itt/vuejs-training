@@ -1,6 +1,6 @@
 const asyncHandler = require("../../../utils/async-handler");
 const ApiResponse = require("../../../utils/api-response");
-const { getUserByIdUsecase } = require("../../usecase");
+const { getUserByIdUsecase } = require("../../usecases");
 
 const { PROFILE_FETCH_SUCCESS } = require("../../../commons/constants");
 

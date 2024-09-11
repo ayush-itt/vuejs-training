@@ -1,6 +1,6 @@
 const asyncHandler = require("../../../utils/async-handler");
 const ApiResponse = require("../../../utils/api-response");
-const { createTaskUsecase } = require("../../usecase");
+const { createTaskUsecase } = require("../../usecases");
 
 const { TASK_CREATE_SUCCESS } = require("../../../commons/constants");
 
