@@ -7,13 +7,12 @@ const taskSchema = new mongoose.Schema(
             required: [true, "Task title is required"],
         },
         dueDate: {
-            type: Date,
+            type: String,
             required: [true, "Due date is required"],
         },
         priority: {
-            type: String,
-            enum: ["Low", "Medium", "High"],
-            default: "Medium",
+            type: Boolean,
+            default: false,
         },
         status: {
             type: Boolean,

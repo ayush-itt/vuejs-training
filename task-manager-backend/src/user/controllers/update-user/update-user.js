@@ -1,14 +1,13 @@
 const asyncHandler = require("../../../utils/async-handler");
 const ApiResponse = require("../../../utils/api-response");
-const Services = require("../../usecase");
+const { updateUserUsecase } = require("../../usecase");
 
 const { USER_UPDATE_SUCCESS } = require("../../../commons/constants");
 
 const updateUser = asyncHandler(async (req, res) => {
-    const { id } = req.params;
+    const userId = req.session.userId;
     const { username, email, password, image } = req.body;
-    const response = await Services.updateUser.execute({
-        id,
+    const response = await updateUserUsecase.execute(userId, {
         username,
         email,
         password,

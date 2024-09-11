@@ -1,4 +1,11 @@
 const Constants = {
+    // ------------------------------------ Auth ------------------------------------------ //
+
+    UNAUTHORIZED_REQUEST: "Unauthorized request!!",
+    EXPIRED_SESSION_TOKEN: "Expired session token!!",
+
+    // ------------------------------------ Auth ------------------------------------------ //
+
     // ------------------------------------ User ------------------------------------------ //
 
     CREATE_SUCCESS: "User created successful!!",
@@ -7,6 +14,10 @@ const Constants = {
 
     LOGIN_SUCCESS: "User logged In successful!!",
     LOGIN_FAILED: "Invalid username or password!!",
+    LOGGED_IN_ALREADY: "User already logged in!!",
+
+    LOGOUT_SUCCESS: "User logged out successful!!",
+    LOGOUT_FAILED: "User logged out failed!!",
 
     PROFILE_FETCH_SUCCESS: "User profile fetched successful!!",
     PROFILE_FETCH_FAILED: "Unable to fetch user profile!!",
@@ -17,7 +28,25 @@ const Constants = {
     USER_DELETE_SUCCESS: "User deleted successfully!!",
     USER_DELETE_FAILED: "Unable to delete user!!",
 
+    USER_EXCLUDED_FIELDS: "-password -__v",
+
     // ------------------------------------ User ------------------------------------------ //
+
+    // ------------------------------------ Task ------------------------------------------ //
+
+    TASK_CREATE_SUCCESS: "Task created successfully!!",
+    TASK_CREATE_FAILED: "Task creation failed!!",
+
+    TASK_FETCH_SUCCESS: "Task fetched successfully!!",
+    TASK_FETCH_FAILED: "Task fetch failed!!",
+
+    TASK_UPDATE_SUCCESS: "Task updated successfully!!",
+    TASK_UPDATE_FAILED: "Task update failed!!",
+
+    TASK_DELETE_SUCCESS: "Task deleted successfully!!",
+    TASK_DELETE_FAILED: "Task delete failed!!",
+
+    // ------------------------------------ Task ------------------------------------------ //
 };
 
 module.exports = Constants;

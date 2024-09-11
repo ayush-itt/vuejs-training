@@ -3,17 +3,25 @@ const router = express.Router();
 const {
     signupUser,
     loginUser,
+    logoutUser,
     getAllUsers,
     getUserById,
     updateUser,
     deleteUser,
 } = require("../controllers");
 
-router.post("/signup", signupUser);
-router.post("/login", loginUser);
+const authMiddleware = require("../../middlewares/auth-middleware");
+const unAuthMiddleware = require("../../middlewares/un-auth-middleware");
+const isAdminMiddleware = require("../../middlewares/is-admin-middleware");
 
-router.get("/", getAllUsers);
+router.post("/signup", unAuthMiddleware, signupUser);
+router.post("/login", unAuthMiddleware, loginUser);
+router.get("/logout", authMiddleware, logoutUser);
 
-router.route("/:id").get(getUserById).patch(updateUser).delete(deleteUser);
+router.get("/", authMiddleware, isAdminMiddleware, getAllUsers);
+
+router.get("/profile", authMiddleware, getUserById);
+router.patch("/profile", authMiddleware, updateUser);
+router.delete("/profile", authMiddleware, deleteUser);
 
 module.exports = router;

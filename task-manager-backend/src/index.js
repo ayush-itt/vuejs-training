@@ -1,10 +1,6 @@
 const database = require("./config/mongodb-config");
 const app = require("./app");
-const dotenv = require("dotenv");
-
-dotenv.config({
-    path: "./.env",
-});
+require("dotenv").config({ path: "./.env" });
 
 database
     .connect()
