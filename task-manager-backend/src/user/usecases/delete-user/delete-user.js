@@ -1,7 +1,9 @@
-const mongo = require("../../mongo/user-mongo");
+const userMongo = require("../../mongo/user-mongo");
+const { deleteAllTasksUsecase } = require("../../../task/usecases");
 exports.execute = async (id) => {
     try {
-        await mongo.deleteUser(id);
+        await deleteAllTasksUsecase.execute(id);
+        await userMongo.deleteUser(id);
         return true;
     } catch (error) {
         throw error;

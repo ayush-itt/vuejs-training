@@ -1,4 +1,4 @@
-const mongo = require("../../mongo/user-mongo");
+const userMongo = require("../../mongo/user-mongo");
 const ApiError = require("../../../utils/api-error");
 const removeExcludedFields = require("../../../utils/remove-excluded-fields");
 const {
@@ -8,11 +8,11 @@ const {
 
 exports.execute = async (userData) => {
     try {
-        const user = await mongo.getUserByUsername(userData.username);
+        const user = await userMongo.getUserByUsername(userData.username);
         if (user) {
             throw new ApiError(401, CREATE_FAILED);
         }
-        const response = await mongo.createUser(userData);
+        const response = await userMongo.createUser(userData);
         const newUser = removeExcludedFields(
             response.toJSON(),
             USER_EXCLUDED_FIELDS
