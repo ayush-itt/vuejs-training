@@ -47,6 +47,22 @@ const Constants = {
     TASK_DELETE_FAILED: "Task delete failed!!",
 
     // ------------------------------------ Task ------------------------------------------ //
+
+    // ------------------------------------ Mail ------------------------------------------ //
+
+    MAIL_CREATE_SUCCESS: "Mail created successfully!!",
+    MAIL_CREATE_FAILED: "Mail creation failed!!",
+
+    MAIL_FETCH_SUCCESS: "Mail fetched successfully!!",
+    MAIL_FETCH_FAILED: "Mail fetch failed!!",
+
+    MAIL_UPDATE_SUCCESS: "Mail updated successfully!!",
+    MAIL_UPDATE_FAILED: "Mail update failed!!",
+
+    MAIL_DELETE_SUCCESS: "Mail deleted successfully!!",
+    MAIL_DELETE_FAILED: "Mail delete failed!!",
+
+    // ------------------------------------ Mail ------------------------------------------ //
 };
 
 module.exports = Constants;
