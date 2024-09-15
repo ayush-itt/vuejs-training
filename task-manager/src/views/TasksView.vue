@@ -114,20 +114,11 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
-        <!-- <TaskFormComponent
-            :dialog="dialog"
-            :editTask="editTask"
-            :newTask="newTask"
-            :valid="valid"
-            :addTaskHandler="addTaskHandler"
-            :updateTaskHandler="updateTaskHandler"
-        ></TaskFormComponent> -->
     </v-col>
 </template>
 
 <script>
 import TaskListComponent from "../components/TaskListComponent";
-// import TaskFormComponent from "../components/TaskFormComponent";
 import ActionRenderer from "@/components/ActionRenderer"; // eslint-disable-line no-unused-vars
 
 export default {
@@ -135,7 +126,6 @@ export default {
     components: {
         ActionRenderer, // eslint-disable-line
         TaskListComponent,
-        // TaskFormComponent,
     },
     data() {
         return {
@@ -144,6 +134,7 @@ export default {
             editTask: false,
             valid: false,
             newTask: {
+                id: null,
                 title: "",
                 dueDate: "",
                 priority: false,
@@ -217,21 +208,30 @@ export default {
             };
         },
         updateTaskHandler() {
-            this.$store.dispatch("updateTask", this.newTask);
+            this.$store.dispatch("updateTask", { ...this.newTask });
             this.resetForm();
             this.editTask = false;
         },
         deleteTaskHandler(taskId) {
             this.$store.dispatch("deleteTask", taskId);
         },
-    },
-    watch: {
-        allTasks: {
-            handler(newTodos) {
-                this.$store.dispatch("updateTask", newTodos);
-            },
-            deep: true,
+        logChanges(newTodos, oldTodos) {
+            for (const key in newTodos) {
+                if (newTodos[key].title !== oldTodos[key].title) {
+                    return newTodos[key];
+                }
+            }
+            return [];
         },
     },
+    // watch: {
+    //     allTasks: {
+    //         handler(newTodos, oldTodos) {
+    //             const changedTodo = this.logChanges(newTodos, oldTodos);
+    //             console.log(changedTodo);
+    //         },
+    //         deep: true,
+    //     },
+    // },
 };
 </script>
