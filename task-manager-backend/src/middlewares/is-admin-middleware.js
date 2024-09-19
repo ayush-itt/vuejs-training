@@ -7,7 +7,7 @@ const isAdminMiddleware = asyncHandler(async (req, _, next) => {
     if (req.session?.isAdmin) {
         next();
     } else {
-        throw new ApiError(404, UNAUTHORIZED_REQUEST);
+        throw new ApiError(401, UNAUTHORIZED_REQUEST);
     }
 });
 

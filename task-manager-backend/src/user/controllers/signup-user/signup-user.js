@@ -4,16 +4,22 @@ const { signupUserUsecase } = require("../../usecases");
 
 const { CREATE_SUCCESS } = require("../../../commons/constants");
 
-const signupUser = asyncHandler(async (req, res) => {
-    const { username, email, password, image, isAdmin } = req.body;
-    const response = await signupUserUsecase.execute({
-        username,
-        email,
-        password,
-        image,
-        isAdmin,
-    });
-    res.status(201).json(new ApiResponse(201, response, CREATE_SUCCESS));
-});
-
-module.exports = signupUser;
+module.exports = {
+    signupUser: {
+        path: "/signup",
+        reqType: "post",
+        method: asyncHandler(async (req, res) => {
+            const { username, email, password, image, isAdmin } = req.body;
+            const response = await signupUserUsecase.execute({
+                username,
+                email,
+                password,
+                image,
+                isAdmin,
+            });
+            res.status(201).json(
+                new ApiResponse(201, response, CREATE_SUCCESS)
+            );
+        }),
+    },
+};

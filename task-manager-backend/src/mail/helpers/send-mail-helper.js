@@ -19,10 +19,9 @@ const sendMailHelper = async ({
     };
 
     try {
-        const response = await transporter.sendMail(mailOptions);
-        return response;
+        return await transporter.sendMail(mailOptions);
     } catch (error) {
-        throw new ApiError(401, error.message);
+        throw new ApiError(500, error.message);
     }
 };
 

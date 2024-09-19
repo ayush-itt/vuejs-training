@@ -6,17 +6,17 @@ const {
     getTaskById,
     updateTask,
     deleteTask,
-    deletaAllTasks,
+    deleteAllTasks,
 } = require("../controllers");
 
-const authMiddleware = require("../../middlewares/auth-middleware");
+const authorizeMiddleware = require("../../middlewares/authorize-middleware");
 
-router.post("/", authMiddleware, createTask);
-router.get("/", authMiddleware, getAllTasks);
-router.delete("/", authMiddleware, deletaAllTasks);
+router.post(createTask.path, authorizeMiddleware, createTask.method);
+router.get(getAllTasks.path, authorizeMiddleware, getAllTasks.method);
+router.delete(deleteAllTasks.path, authorizeMiddleware, deleteAllTasks.method);
 
-router.get("/:id", authMiddleware, getTaskById);
-router.patch("/:id", authMiddleware, updateTask);
-router.delete("/:id", authMiddleware, deleteTask);
+router.get(getTaskById.path, authorizeMiddleware, getTaskById.method);
+router.patch(updateTask.path, authorizeMiddleware, updateTask.method);
+router.delete(deleteTask.path, authorizeMiddleware, deleteTask.method);
 
 module.exports = router;

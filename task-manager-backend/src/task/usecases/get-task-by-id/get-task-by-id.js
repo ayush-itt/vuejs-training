@@ -1,10 +1,11 @@
 const taskMongo = require("../../mongo/task-mongo");
 
-exports.execute = async (taskId, userId) => {
-    try {
-        const task = await taskMongo.getTaskById(taskId, userId);
-        return task;
-    } catch (error) {
-        throw error;
-    }
+module.exports = {
+    async execute(taskId, userId) {
+        try {
+            return await taskMongo.getTaskById(taskId, userId);
+        } catch (error) {
+            throw error;
+        }
+    },
 };

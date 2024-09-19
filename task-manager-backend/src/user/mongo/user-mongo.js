@@ -10,8 +10,7 @@ const {
 
 const createUser = async (user) => {
     try {
-        const newUser = await User.create(user);
-        return newUser;
+        return await User.create(user);
     } catch (error) {
         throw new ApiError(500, CREATE_FAILED);
     }
@@ -19,8 +18,7 @@ const createUser = async (user) => {
 
 const getAllUsers = async () => {
     try {
-        const users = await User.find();
-        return users;
+        return await User.find();
     } catch (error) {
         throw new ApiError(500, PROFILE_FETCH_FAILED);
     }
@@ -28,8 +26,7 @@ const getAllUsers = async () => {
 
 const getUserByUsername = async (username) => {
     try {
-        const user = await User.findOne({ username: username });
-        return user;
+        return await User.findOne({ username: username });
     } catch (error) {
         throw new ApiError(500, PROFILE_FETCH_FAILED);
     }
@@ -37,8 +34,7 @@ const getUserByUsername = async (username) => {
 
 const getUserById = async (id) => {
     try {
-        const user = await User.findById(id);
-        return user;
+        return await User.findById(id);
     } catch (error) {
         throw new ApiError(500, PROFILE_FETCH_FAILED);
     }
@@ -46,10 +42,9 @@ const getUserById = async (id) => {
 
 const updateUser = async (id, user) => {
     try {
-        const updatedUser = await User.findByIdAndUpdate(id, user, {
+        return await User.findByIdAndUpdate(id, user, {
             new: true,
         });
-        return updatedUser;
     } catch (error) {
         throw new ApiError(500, USER_UPDATE_FAILED);
     }
@@ -58,7 +53,6 @@ const updateUser = async (id, user) => {
 const deleteUser = async (id) => {
     try {
         await User.findByIdAndDelete(id);
-        return true;
     } catch (error) {
         throw new ApiError(500, USER_DELETE_FAILED);
     }

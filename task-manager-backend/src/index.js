@@ -11,5 +11,5 @@ database
     )
     .catch((err) => {
         console.error(err);
-        process.exit(1); // Exit with a non-zero status code to indicate an error
+        process.exit(1);
     });

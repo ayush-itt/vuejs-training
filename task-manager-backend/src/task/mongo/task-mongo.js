@@ -10,19 +10,17 @@ const {
 
 const createTask = async (data) => {
     try {
-        const task = await Task.create(data);
-        return task;
+        return await Task.create(data);
     } catch (error) {
-        throw new ApiError(401, TASK_CREATE_FAILED);
+        throw new ApiError(500, TASK_CREATE_FAILED);
     }
 };
 
 const getAllTasks = async (userId) => {
     try {
-        const tasks = await Task.find({ userId });
-        return tasks;
+        return await Task.find({ userId });
     } catch (error) {
-        throw new ApiError(401, TASK_FETCH_FAILED);
+        throw new ApiError(500, TASK_FETCH_FAILED);
     }
 };
 
@@ -32,38 +30,33 @@ const getTaskById = async (taskId, userId) => {
         if (!task) throw new Error();
         return task;
     } catch (error) {
-        throw new ApiError(401, TASK_FETCH_FAILED);
+        throw new ApiError(500, TASK_FETCH_FAILED);
     }
 };
 
 const updateTask = async (taskId, userId, data) => {
     try {
-        const updatedTask = await Task.findOneAndUpdate(
-            { _id: taskId, userId },
-            data,
-            { new: true }
-        );
-        return updatedTask;
+        return await Task.findOneAndUpdate({ _id: taskId, userId }, data, {
+            new: true,
+        });
     } catch (error) {
-        throw new ApiError(401, TASK_UPDATE_FAILED);
+        throw new ApiError(500, TASK_UPDATE_FAILED);
     }
 };
 
 const deleteTask = async (taskId, userId) => {
     try {
         await Task.findOneAndDelete({ _id: taskId, userId });
-        return true;
     } catch (error) {
-        throw new ApiError(401, TASK_DELETE_FAILED);
+        throw new ApiError(500, TASK_DELETE_FAILED);
     }
 };
 
 const deleteAllTasks = async (userId) => {
     try {
         await Task.deleteMany({ userId });
-        return true;
     } catch (error) {
-        throw new ApiError(401, TASK_DELETE_FAILED);
+        throw new ApiError(500, TASK_DELETE_FAILED);
     }
 };
 

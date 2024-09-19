@@ -3,7 +3,7 @@ const ApiError = require("../utils/api-error");
 
 const { LOGGED_IN_ALREADY } = require("../commons/constants");
 
-const authMiddleware = asyncHandler(async (req, _, next) => {
+const unauthorizeMiddleware = asyncHandler(async (req, _, next) => {
     if (req.session && !req.session.auth) {
         next();
     } else {
@@ -11,4 +11,4 @@ const authMiddleware = asyncHandler(async (req, _, next) => {
     }
 });
 
-module.exports = authMiddleware;
+module.exports = unauthorizeMiddleware;

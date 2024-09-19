@@ -3,23 +3,23 @@ const mongoose = require("mongoose");
 class Database {
     constructor() {
         if (!Database.instance) {
-            this.conn = null;
+            this.connectionObj = null;
             Database.instance = this;
         }
         return Database.instance;
     }
 
     async connect() {
-        if (!this.conn) {
+        if (!this.connectionObj) {
             try {
-                this.conn = await mongoose.connect(
+                this.connectionObj = await mongoose.connect(
                     `${process.env.MONGODB_URI}`,
                     {
                         useNewUrlParser: true,
                     }
                 );
                 console.log(
-                    `🔐 MongoDB Connected: ${this.conn.connection.host}`
+                    `🔐 MongoDB Connected: ${this.connectionObj.connection.host}`
                 );
             } catch (error) {
                 throw new Error(
@@ -31,10 +31,10 @@ class Database {
 
     async disconnect() {
         try {
-            if (this.conn) {
+            if (this.connectionObj) {
                 await mongoose.disconnect();
                 console.log("🔗 MongoDB Disconnected!!");
-                this.conn = null;
+                this.connectionObj = null;
             }
         } catch (error) {
             throw new Error(`😥 MongoDB Disconnect Error : ${error.message}`);

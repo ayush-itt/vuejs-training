@@ -1,8 +1,7 @@
 const ApiError = require("../utils/api-error");
 
 const notFound = (req, res, next) => {
-    const error = new ApiError(404, `404 Not Found!! ${req.originalUrl}`);
-    next(error);
+    next(new ApiError(404, `404 Not Found!! ${req.originalUrl}`));
 };
 
 const errorHandler = (err, req, res, next) => {
