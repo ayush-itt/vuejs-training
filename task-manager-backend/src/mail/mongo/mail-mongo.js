@@ -1,4 +1,3 @@
-const ApiError = require("../../utils/api-error");
 const Mail = require("./mail-model");
 const {
     MAIL_CREATE_FAILED,
@@ -11,7 +10,7 @@ const createMail = async (data) => {
     try {
         return await Mail.create(data);
     } catch (error) {
-        throw new ApiError(500, MAIL_CREATE_FAILED);
+        throw new Error(MAIL_CREATE_FAILED);
     }
 };
 
@@ -19,7 +18,7 @@ const getAllMailsByUserId = async (userId) => {
     try {
         return await Mail.find({ userId });
     } catch (error) {
-        throw new ApiError(500, MAIL_FETCH_FAILED);
+        throw new Error(MAIL_FETCH_FAILED);
     }
 };
 
@@ -29,7 +28,7 @@ const getMailById = async (mailId, userId) => {
         if (!mail) throw new Error();
         return mail;
     } catch (error) {
-        throw new ApiError(500, MAIL_FETCH_FAILED);
+        throw new Error(MAIL_FETCH_FAILED);
     }
 };
 
@@ -41,7 +40,7 @@ const updateMailStatus = async (mailId, status) => {
             { new: true }
         );
     } catch (error) {
-        throw new ApiError(500, MAIL_UPDATE_FAILED);
+        throw new Error(MAIL_UPDATE_FAILED);
     }
 };
 
@@ -49,7 +48,7 @@ const deleteMail = async (mailId) => {
     try {
         await Mail.findOneAndDelete({ _id: mailId });
     } catch (error) {
-        throw new ApiError(500, MAIL_DELETE_FAILED);
+        throw new Error(MAIL_DELETE_FAILED);
     }
 };
 
@@ -57,7 +56,7 @@ const deleteAllMails = async (userId) => {
     try {
         await Mail.deleteMany({ userId });
     } catch (error) {
-        throw new ApiError(500, MAIL_DELETE_FAILED);
+        throw new Error(MAIL_DELETE_FAILED);
     }
 };
 

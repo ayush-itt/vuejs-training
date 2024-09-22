@@ -1,5 +1,4 @@
 const userMongo = require("../../mongo/user-mongo");
-const ApiError = require("../../../utils/api-error");
 const removeExcludedFields = require("../../../utils/remove-excluded-fields");
 const {
     LOGIN_FAILED,
@@ -11,7 +10,7 @@ module.exports = {
         try {
             const user = await userMongo.getUserByUsername(userData.username);
             if (user.password !== userData.password) {
-                throw new ApiError(401, LOGIN_FAILED);
+                throw new Error(LOGIN_FAILED);
             }
             const loggedUser = removeExcludedFields(
                 user.toJSON(),
@@ -19,7 +18,7 @@ module.exports = {
             );
             return loggedUser;
         } catch (error) {
-            throw new ApiError(401, LOGIN_FAILED);
+            throw error;
         }
     },
 };

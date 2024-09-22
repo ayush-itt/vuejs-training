@@ -1,8 +1,7 @@
 const userMongo = require("../../mongo/user-mongo");
-const ApiError = require("../../../utils/api-error");
 const { sendMailUsecase } = require("../../../mail/usecases");
 const removeExcludedFields = require("../../../utils/remove-excluded-fields");
-``;
+
 const {
     CREATE_FAILED,
     USER_EXCLUDED_FIELDS,
@@ -28,8 +27,7 @@ async function sendWelcomeEmail(userId) {
 module.exports = {
     async execute(userData) {
         try {
-            if (await isUserAlreadyExist())
-                throw new ApiError(403, CREATE_FAILED);
+            if (await isUserAlreadyExist()) throw new Error(CREATE_FAILED);
 
             const response = await userMongo.createUser(userData);
             const newUser = removeExcludedFields(

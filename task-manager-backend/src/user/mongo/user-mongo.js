@@ -1,4 +1,3 @@
-const ApiError = require("../../utils/api-error");
 const User = require("./user-model");
 
 const {
@@ -12,7 +11,7 @@ const createUser = async (user) => {
     try {
         return await User.create(user);
     } catch (error) {
-        throw new ApiError(500, CREATE_FAILED);
+        throw new Error(CREATE_FAILED);
     }
 };
 
@@ -20,7 +19,7 @@ const getAllUsers = async () => {
     try {
         return await User.find();
     } catch (error) {
-        throw new ApiError(500, PROFILE_FETCH_FAILED);
+        throw new Error(PROFILE_FETCH_FAILED);
     }
 };
 
@@ -28,7 +27,7 @@ const getUserByUsername = async (username) => {
     try {
         return await User.findOne({ username: username });
     } catch (error) {
-        throw new ApiError(500, PROFILE_FETCH_FAILED);
+        throw new Error(PROFILE_FETCH_FAILED);
     }
 };
 
@@ -36,7 +35,7 @@ const getUserById = async (id) => {
     try {
         return await User.findById(id);
     } catch (error) {
-        throw new ApiError(500, PROFILE_FETCH_FAILED);
+        throw new Error(PROFILE_FETCH_FAILED);
     }
 };
 
@@ -46,7 +45,7 @@ const updateUser = async (id, user) => {
             new: true,
         });
     } catch (error) {
-        throw new ApiError(500, USER_UPDATE_FAILED);
+        throw new Error(USER_UPDATE_FAILED);
     }
 };
 
@@ -54,7 +53,7 @@ const deleteUser = async (id) => {
     try {
         await User.findByIdAndDelete(id);
     } catch (error) {
-        throw new ApiError(500, USER_DELETE_FAILED);
+        throw new Error(USER_DELETE_FAILED);
     }
 };
 

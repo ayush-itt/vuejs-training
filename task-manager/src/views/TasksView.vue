@@ -224,14 +224,5 @@ export default {
             return [];
         },
     },
-    // watch: {
-    //     allTasks: {
-    //         handler(newTodos, oldTodos) {
-    //             const changedTodo = this.logChanges(newTodos, oldTodos);
-    //             console.log(changedTodo);
-    //         },
-    //         deep: true,
-    //     },
-    // },
 };
 </script>

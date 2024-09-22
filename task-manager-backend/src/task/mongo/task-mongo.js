@@ -1,4 +1,3 @@
-const ApiError = require("../../utils/api-error");
 const Task = require("./task-model");
 
 const {
@@ -12,7 +11,7 @@ const createTask = async (data) => {
     try {
         return await Task.create(data);
     } catch (error) {
-        throw new ApiError(500, TASK_CREATE_FAILED);
+        throw new Error(TASK_CREATE_FAILED);
     }
 };
 
@@ -20,7 +19,7 @@ const getAllTasks = async (userId) => {
     try {
         return await Task.find({ userId });
     } catch (error) {
-        throw new ApiError(500, TASK_FETCH_FAILED);
+        throw new Error(TASK_FETCH_FAILED);
     }
 };
 
@@ -30,7 +29,7 @@ const getTaskById = async (taskId, userId) => {
         if (!task) throw new Error();
         return task;
     } catch (error) {
-        throw new ApiError(500, TASK_FETCH_FAILED);
+        throw new Error(TASK_FETCH_FAILED);
     }
 };
 
@@ -40,7 +39,7 @@ const updateTask = async (taskId, userId, data) => {
             new: true,
         });
     } catch (error) {
-        throw new ApiError(500, TASK_UPDATE_FAILED);
+        throw new Error(TASK_UPDATE_FAILED);
     }
 };
 
@@ -48,7 +47,7 @@ const deleteTask = async (taskId, userId) => {
     try {
         await Task.findOneAndDelete({ _id: taskId, userId });
     } catch (error) {
-        throw new ApiError(500, TASK_DELETE_FAILED);
+        throw new Error(TASK_DELETE_FAILED);
     }
 };
 
@@ -56,7 +55,7 @@ const deleteAllTasks = async (userId) => {
     try {
         await Task.deleteMany({ userId });
     } catch (error) {
-        throw new ApiError(500, TASK_DELETE_FAILED);
+        throw new Error(TASK_DELETE_FAILED);
     }
 };
 

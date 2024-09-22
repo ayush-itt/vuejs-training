@@ -1,5 +1,6 @@
-const ApiError = require("../../utils/api-error");
 const transporter = require("../../config/nodemailer-config");
+
+const { MAIL_SEND_FAILED } = require("../../commons/constants");
 
 const sendMailHelper = async ({
     sender,
@@ -21,7 +22,7 @@ const sendMailHelper = async ({
     try {
         return await transporter.sendMail(mailOptions);
     } catch (error) {
-        throw new ApiError(500, error.message);
+        throw new Error(MAIL_SEND_FAILED);
     }
 };
 

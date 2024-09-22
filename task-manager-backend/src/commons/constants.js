@@ -62,6 +62,12 @@ const Constants = {
     MAIL_DELETE_SUCCESS: "Mail deleted successfully!!",
     MAIL_DELETE_FAILED: "Mail delete failed!!",
 
+    WELCOME_EMAIL: "welcome_email",
+    TASK_ASSIGN_EMAIL: "task_assign_email",
+    INVALID_MAIL_TYPE: "Invalid mail type!!",
+
+    MAIL_SEND_FAILED: "Mail send failed!!",
+
     // ------------------------------------ Mail ------------------------------------------ //
 };
 
