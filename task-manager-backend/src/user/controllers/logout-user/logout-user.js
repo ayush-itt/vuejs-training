@@ -4,7 +4,7 @@ const { LOGOUT_SUCCESS, LOGOUT_FAILED } = require("../../../commons/constants");
 
 module.exports = {
     logoutUser: {
-        path: "/logout",
+        path: "/users/logout",
         reqType: "get",
         method: async (req, res, next) => {
             try {

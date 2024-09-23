@@ -1,12 +1,11 @@
 const ApiResponse = require("../../../utils/api-response");
 const ApiError = require("../../../utils/api-error");
 const { getUserByIdUsecase } = require("../../usecases");
-
 const { PROFILE_FETCH_SUCCESS } = require("../../../commons/constants");
 
 module.exports = {
     getUserById: {
-        path: "/profile",
+        path: "/users/profile",
         reqType: "get",
         method: async (req, res, next) => {
             try {

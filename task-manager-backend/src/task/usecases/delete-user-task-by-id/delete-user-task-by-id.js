@@ -1,9 +1,9 @@
 const taskMongo = require("../../mongo/task-mongo");
 
 module.exports = {
-    async execute(userId) {
+    async exports(taskId, userId) {
         try {
-            await taskMongo.deleteAllTasks(userId);
+            await taskMongo.deleteUserTaskById(taskId, userId);
         } catch (error) {
             throw error;
         }

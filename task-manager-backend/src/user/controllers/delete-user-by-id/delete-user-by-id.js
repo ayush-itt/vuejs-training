@@ -1,17 +1,16 @@
 const ApiResponse = require("../../../utils/api-response");
 const ApiError = require("../../../utils/api-error");
-const { deleteUserUsecase } = require("../../usecases");
-
+const { deleteUserByIdUsecase } = require("../../usecases");
 const { USER_DELETE_SUCCESS } = require("../../../commons/constants");
 
 module.exports = {
-    deleteUser: {
-        path: "/",
+    deleteUserById: {
+        path: "/users",
         reqType: "delete",
         method: async (req, res, next) => {
             try {
                 const userId = req.session.userId;
-                await deleteUserUsecase.execute(userId);
+                await deleteUserByIdUsecase.execute(userId);
                 req.session.destroy(function (err) {
                     if (err) throw new Error(err.message);
                 });

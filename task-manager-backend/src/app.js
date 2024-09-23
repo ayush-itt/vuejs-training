@@ -21,8 +21,8 @@ app.get("/", (req, res) =>
     res.status(200).json({ message: "Welcome to Task Manager Backend!" })
 );
 
-app.use("/users", userApi);
-app.use("/tasks", taskApi);
+app.use(userApi);
+app.use(taskApi);
 
 app.use(notFound);
 app.use(errorHandler);

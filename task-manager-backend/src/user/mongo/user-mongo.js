@@ -1,5 +1,4 @@
 const User = require("./user-model");
-
 const {
     CREATE_FAILED,
     PROFILE_FETCH_FAILED,
@@ -39,7 +38,7 @@ const getUserById = async (id) => {
     }
 };
 
-const updateUser = async (id, user) => {
+const updateUserById = async (id, user) => {
     try {
         return await User.findByIdAndUpdate(id, user, {
             new: true,
@@ -49,7 +48,7 @@ const updateUser = async (id, user) => {
     }
 };
 
-const deleteUser = async (id) => {
+const deleteUserById = async (id) => {
     try {
         await User.findByIdAndDelete(id);
     } catch (error) {
@@ -62,6 +61,6 @@ module.exports = {
     getAllUsers,
     getUserByUsername,
     getUserById,
-    updateUser,
-    deleteUser,
+    updateUserById,
+    deleteUserById,
 };

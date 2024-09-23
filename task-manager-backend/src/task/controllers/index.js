@@ -1,15 +1,25 @@
 const { createTask } = require("./create-task/create-task");
-const { getAllTasks } = require("./get-all-tasks/get-all-tasks");
-const { getTaskById } = require("./get-task-by-id/get-task-by-id");
-const { updateTask } = require("./update-task/update-task");
-const { deleteTask } = require("./delete-task/delete-task");
-const { deleteAllTasks } = require("./delete-all-tasks/delete-all-tasks");
+const {
+    getTasksByUserId,
+} = require("./get-tasks-by-user-id/get-tasks-by-user-id");
+const {
+    getUserTaskById,
+} = require("./get-user-task-by-id/get-user-task-by-id");
+const {
+    updateUserTaskById,
+} = require("./update-user-task-by-id/update-user-task-by-id");
+const {
+    deleteUserTaskById,
+} = require("./delete-user-task-by-id/delete-user-task-by-id");
+const {
+    deleteUserTasksById,
+} = require("./delete-user-tasks-by-id/delete-user-tasks-by-id");
 
 module.exports = {
     createTask,
-    getAllTasks,
-    getTaskById,
-    updateTask,
-    deleteTask,
-    deleteAllTasks,
+    getTasksByUserId,
+    getUserTaskById,
+    updateUserTaskById,
+    deleteUserTaskById,
+    deleteUserTasksById,
 };

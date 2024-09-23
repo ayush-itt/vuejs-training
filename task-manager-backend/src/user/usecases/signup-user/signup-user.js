@@ -1,7 +1,6 @@
 const userMongo = require("../../mongo/user-mongo");
 const { sendMailUsecase } = require("../../../mail/usecases");
 const removeExcludedFields = require("../../../utils/remove-excluded-fields");
-
 const {
     CREATE_FAILED,
     USER_EXCLUDED_FIELDS,

@@ -1,12 +1,11 @@
 const ApiResponse = require("../../../utils/api-response");
 const ApiError = require("../../../utils/api-error");
 const { loginUserUsecase } = require("../../usecases");
-
 const { LOGIN_SUCCESS } = require("../../../commons/constants");
 
 module.exports = {
     loginUser: {
-        path: "/login",
+        path: "/users/login",
         reqType: "post",
         method: async (req, res, next) => {
             try {

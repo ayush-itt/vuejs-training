@@ -1,16 +1,14 @@
 const userMongo = require("../../../user/mongo/user-mongo");
 const createMailLog = require("../create-mail-log/create-mail-log");
-
 const getEmailTemplate = require("../../helpers/get-email-template");
 const sendMailHelper = require("../../helpers/send-mail-helper");
-
-const sender = process.env.MAIL_USER;
 const {
     PROFILE_FETCH_FAILED,
-    MAIL_CREATE_FAILED,
     TASK_ASSIGN_EMAIL,
     WELCOME_EMAIL,
 } = require("../../../commons/constants");
+
+const sender = process.env.MAIL_USER;
 
 async function getUserEmailById(userId) {
     try {
@@ -32,17 +30,15 @@ async function getAdminEmailById(adminId) {
     }
 }
 
-async function getEmailList(emailType) {
+async function getEmailList(emailType, userId, adminId) {
     try {
         const receiverList = [],
             ccList = [];
         switch (emailType) {
             case TASK_ASSIGN_EMAIL:
-                const adminEmail = await getAdminEmailById(adminId);
-                ccList.push(adminEmail);
+                ccList.push(await getAdminEmailById(adminId));
             case WELCOME_EMAIL:
-                const userEmail = await getUserEmailById(userId);
-                receiverList.push(userEmail);
+                receiverList.push(await getUserEmailById(userId));
                 break;
             default:
                 break;
@@ -53,18 +49,14 @@ async function getEmailList(emailType) {
     }
 }
 
-async function logMailOperation(mailLogData) {
-    try {
-        await createMailLog.execute(mailLogData);
-    } catch (error) {
-        throw new Error(MAIL_CREATE_FAILED);
-    }
-}
-
 module.exports = {
     async execute(emailType, userId, adminId = undefined) {
         try {
-            const { receiverList, ccList } = await getEmailList(emailType);
+            const { receiverList, ccList } = await getEmailList(
+                emailType,
+                userId,
+                adminId
+            );
 
             const { subject, content, htmlTemplate } = getEmailTemplate(
                 emailType,
@@ -72,16 +64,15 @@ module.exports = {
                 ccList
             );
 
-            const mailData = {
+            const response = await sendMailHelper({
                 sender,
                 receiverList,
                 ccList,
                 subject,
                 content,
                 htmlTemplate,
-            };
-            const response = await sendMailHelper(mailData);
-            await logMailOperation({
+            });
+            await createMailLog.execute({
                 userId,
                 sender,
                 receiverList,
@@ -90,7 +81,7 @@ module.exports = {
             });
             return response;
         } catch (error) {
-            await logMailOperation({
+            await createMailLog.execute({
                 userId,
                 sender,
                 receiverList,

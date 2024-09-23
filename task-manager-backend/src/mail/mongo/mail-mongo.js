@@ -14,7 +14,7 @@ const createMail = async (data) => {
     }
 };
 
-const getAllMailsByUserId = async (userId) => {
+const getMailsByUserId = async (userId) => {
     try {
         return await Mail.find({ userId });
     } catch (error) {
@@ -44,7 +44,7 @@ const updateMailStatus = async (mailId, status) => {
     }
 };
 
-const deleteMail = async (mailId) => {
+const deleteMailById = async (mailId) => {
     try {
         await Mail.findOneAndDelete({ _id: mailId });
     } catch (error) {
@@ -52,7 +52,7 @@ const deleteMail = async (mailId) => {
     }
 };
 
-const deleteAllMails = async (userId) => {
+const deleteMailsByUserId = async (userId) => {
     try {
         await Mail.deleteMany({ userId });
     } catch (error) {
@@ -62,9 +62,9 @@ const deleteAllMails = async (userId) => {
 
 module.exports = {
     createMail,
-    getAllMailsByUserId,
+    getMailsByUserId,
     getMailById,
     updateMailStatus,
-    deleteMail,
-    deleteAllMails,
+    deleteMailById,
+    deleteMailsByUserId,
 };

@@ -1,12 +1,11 @@
 const ApiResponse = require("../../../utils/api-response");
 const ApiError = require("../../../utils/api-error");
 const { signupUserUsecase } = require("../../usecases");
-
 const { CREATE_SUCCESS } = require("../../../commons/constants");
 
 module.exports = {
     signupUser: {
-        path: "/signup",
+        path: "/users/signup",
         reqType: "post",
         method: async (req, res, next) => {
             try {

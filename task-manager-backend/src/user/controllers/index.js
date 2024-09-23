@@ -3,8 +3,8 @@ const { loginUser } = require("./login-user/login-user");
 const { logoutUser } = require("./logout-user/logout-user");
 const { getAllUsers } = require("./get-all-user/get-all-user");
 const { getUserById } = require("./get-user-by-id/get-user-by-id");
-const { updateUser } = require("./update-user/update-user");
-const { deleteUser } = require("./delete-user/delete-user");
+const { updateUserById } = require("./update-user-by-id/update-user-by-id");
+const { deleteUserById } = require("./delete-user-by-id/delete-user-by-id");
 
 module.exports = {
     signupUser,
@@ -12,6 +12,6 @@ module.exports = {
     logoutUser,
     getAllUsers,
     getUserById,
-    updateUser,
-    deleteUser,
+    updateUserById,
+    deleteUserById,
 };

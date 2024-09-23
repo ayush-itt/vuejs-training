@@ -1,5 +1,4 @@
 const Task = require("./task-model");
-
 const {
     TASK_CREATE_FAILED,
     TASK_FETCH_FAILED,
@@ -15,7 +14,7 @@ const createTask = async (data) => {
     }
 };
 
-const getAllTasks = async (userId) => {
+const getTasksByUserId = async (userId) => {
     try {
         return await Task.find({ userId });
     } catch (error) {
@@ -23,7 +22,7 @@ const getAllTasks = async (userId) => {
     }
 };
 
-const getTaskById = async (taskId, userId) => {
+const getUserTaskById = async (taskId, userId) => {
     try {
         const task = await Task.findOne({ _id: taskId, userId });
         if (!task) throw new Error();
@@ -33,7 +32,7 @@ const getTaskById = async (taskId, userId) => {
     }
 };
 
-const updateTask = async (taskId, userId, data) => {
+const updateUserTaskById = async (taskId, userId, data) => {
     try {
         return await Task.findOneAndUpdate({ _id: taskId, userId }, data, {
             new: true,
@@ -43,7 +42,7 @@ const updateTask = async (taskId, userId, data) => {
     }
 };
 
-const deleteTask = async (taskId, userId) => {
+const deleteUserTaskById = async (taskId, userId) => {
     try {
         await Task.findOneAndDelete({ _id: taskId, userId });
     } catch (error) {
@@ -51,7 +50,7 @@ const deleteTask = async (taskId, userId) => {
     }
 };
 
-const deleteAllTasks = async (userId) => {
+const deleteUserTasksById = async (userId) => {
     try {
         await Task.deleteMany({ userId });
     } catch (error) {
@@ -61,9 +60,9 @@ const deleteAllTasks = async (userId) => {
 
 module.exports = {
     createTask,
-    getAllTasks,
-    getTaskById,
-    updateTask,
-    deleteTask,
-    deleteAllTasks,
+    getTasksByUserId,
+    getUserTaskById,
+    updateUserTaskById,
+    deleteUserTaskById,
+    deleteUserTasksById,
 };

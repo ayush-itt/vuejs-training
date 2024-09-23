@@ -2,20 +2,21 @@ const ApiResponse = require("../../../utils/api-response");
 const ApiError = require("../../../utils/api-error");
 const { createTaskUsecase } = require("../../usecases");
 const { sendMailUsecase } = require("../../../mail/usecases");
-
 const { TASK_CREATE_SUCCESS } = require("../../../commons/constants");
 
-async function sendTaskAssignEmail(userId, adminId) {
-    try {
-        await sendMailUsecase.execute("task_assign_email", userId, adminId);
-    } catch (error) {
-        throw error;
+async function sendTaskAssignEmail(userId, session) {
+    if (session.isAdmin && session.userId != userId) {
+        try {
+            await sendMailUsecase.execute("task_assign_email", userId, adminId);
+        } catch (error) {
+            throw error;
+        }
     }
 }
 
 module.exports = {
     createTask: {
-        path: "/",
+        path: "/tasks",
         reqType: "post",
         method: async (req, res, next) => {
             try {
@@ -30,11 +31,7 @@ module.exports = {
                     userId,
                 });
 
-                if (
-                    req.session.isAdmin &&
-                    req.session.userId != req.body.userId
-                )
-                    await sendTaskAssignEmail(userId, req.session.userId);
+                await sendTaskAssignEmail(userId, req.session);
                 res.status(201).json(
                     new ApiResponse(201, response, TASK_CREATE_SUCCESS)
                 );

@@ -1,5 +1,4 @@
 const transporter = require("../../config/nodemailer-config");
-
 const { MAIL_SEND_FAILED } = require("../../commons/constants");
 
 const sendMailHelper = async ({

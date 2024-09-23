@@ -6,8 +6,8 @@ const {
     logoutUser,
     getAllUsers,
     getUserById,
-    updateUser,
-    deleteUser,
+    updateUserById,
+    deleteUserById,
 } = require("../controllers");
 
 const authorizeMiddleware = require("../../middlewares/authorize-middleware");
@@ -26,7 +26,7 @@ router.get(
 );
 
 router.get(getUserById.path, authorizeMiddleware, getUserById.method);
-router.patch(updateUser.path, authorizeMiddleware, updateUser.method);
-router.delete(deleteUser.path, authorizeMiddleware, deleteUser.method);
+router.patch(updateUserById.path, authorizeMiddleware, updateUserById.method);
+router.delete(deleteUserById.path, authorizeMiddleware, deleteUserById.method);
 
 module.exports = router;
